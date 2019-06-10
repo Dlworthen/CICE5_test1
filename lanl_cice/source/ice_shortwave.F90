@@ -1582,8 +1582,9 @@
          fswthruidf(i,j)  = c0
       ! compute fraction of nir down direct to total over all points:
          fnidr(i,j) = c0
-         if( swidr(i,j) + swidf(i,j) > puny ) then
-            fnidr(i,j) = swidr(i,j)/(swidr(i,j)+swidf(i,j))
+!        if( swidr(i,j) + swidf(i,j) > puny ) then
+         if (abs(swidr(i,j) + swidf(i,j)) > 1.0e-6 ) then
+            fnidr(i,j) = max(c0, min(swidr(i,j)/(swidr(i,j)+swidf(i,j)), 1.0))
          endif
          albice(i,j)    = c0
          albsno(i,j)    = c0
